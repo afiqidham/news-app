@@ -10,7 +10,7 @@ const Home = () =>{
                         <TextField sx={{ width:"300px" }} size="small"></TextField>
                         <Button>Search</Button>
                         <Chip label="Username"/>
-                        <Button>Logout</Button>
+                        <Button variant="contained" size="small" sx={{ height:"28px" }}>Logout</Button>
                     </Stack>
                 </Grid>
                 <Grid className="content-container" item lg={11}>
@@ -18,7 +18,7 @@ const Home = () =>{
                         <Grid className="left-panel-container" item lg={2.5}>
                             <Stack direction="row" spacing={4} sx={{ marginTop:'40px' }}>
                                 <p>Favourites</p>
-                                <Button variant="contained">Clear</Button>
+                                <Button variant="contained" size="small" sx={{ height:"25px" }}>Clear</Button>
                             </Stack>
                         </Grid>
                         <Grid className="result-container" item lg={9.5}>
