@@ -1,25 +1,18 @@
-import { Box, Button, Chip, Grid, Stack, TextField } from "@mui/material";
+import { Avatar, Box, Button, Chip, Grid, Stack, TextField } from "@mui/material";
+import Header from "../header/Header";
+import FavouritePanel from "../favouritePanel/FavouritePanel";
 
 
 const Home = () =>{
     return(
             <Grid container className="main-container" direction={"column"}>
                 <Grid className="header-container" item lg={1} style={{ maxHeight:"10vh" }}>
-                    <Stack direction="row" spacing={3}>
-                        <h4 style={{ marginRight:'40px' }}>News Finder</h4>
-                        <TextField sx={{ width:"300px" }} size="small"></TextField>
-                        <Button>Search</Button>
-                        <Chip label="Username"/>
-                        <Button variant="contained" size="small" sx={{ height:"28px" }}>Logout</Button>
-                    </Stack>
+                    <Header/>
                 </Grid>
                 <Grid className="content-container" item lg={11}>
                     <Grid container direction="row" style={{ height:"100%" }}>
                         <Grid className="left-panel-container" item lg={2.5}>
-                            <Stack direction="row" spacing={4} sx={{ marginTop:'40px' }}>
-                                <p>Favourites</p>
-                                <Button variant="contained" size="small" sx={{ height:"25px" }}>Clear</Button>
-                            </Stack>
+                            <FavouritePanel/>
                         </Grid>
                         <Grid className="result-container" item lg={9.5}>
                             
