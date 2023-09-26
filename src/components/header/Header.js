@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Box, Button, Chip, Grid, Stack, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 
 const Header = ({keyword, handleSetKeyword}) => {
 
     const [isLoggedIn, setIsloggedIn] = useState(true);
     const [userName, setUserName] = useState('John');
+    const navigate = useNavigate();
     
 
     const handleSearchClick = () => {
@@ -14,6 +17,7 @@ const Header = ({keyword, handleSetKeyword}) => {
     const handleLogout = () => {
         setIsloggedIn(false);
         setUserName('');
+        navigate('/')
     }
 
 
