@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Box, Button, Chip, Grid, Stack, TextField } from "@mui/material";
 
-const FavouritePanel = () => {
+const FavouritePanel = ({myFavourites, clearMyFavourites}) => {
     return(
         <Stack direction="row" spacing={4} sx={{ marginTop:'40px' }}>
             <p>Favourites</p>

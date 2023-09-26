@@ -1,40 +1,91 @@
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Grid, Button, TextField, LinearProgress, Snackbar, Alert } from '@mui/material';
 import { AccountCircleRounded, Password } from '@mui/icons-material';
-import { Link, Navigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 const Login = () => {
+
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isLoggedIn, setIsloggedIn] = useState("");
+    const [isLoginProgress, setIsLoginProgress] = useState(false);
+    const navigate = useNavigate();
 
-    const isLoggedIn = (e) => {
-        e.preventDefault();
-        if(userName === "John" && password === "1234") {
-            localStorage.setItem("loggedIn", "true");
-         <Navigate to="/home"></Navigate>;
+   const validateUser = () => {
+    if (userName === 'John' && password === '12345') {
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("userName", userName);
+        return true;
+    }
+    return false;
+   };
+
+   const handleLogin = () => {
+    setIsLoginProgress(true);
+
+    setTimeout(() => {
+        if(validateUser()) {
+            setIsloggedIn(true);
+            navigate('/home');
         } else {
-            alert("Check your username and password");
+            setErrorMessage('Invalid username and password');
         }
-    };
+        setIsLoginProgress(false);
+       }, 2000);
+   };
+
+
+
+   useEffect(() => {
+    if(isLoggedIn) {
+        navigate('/home');
+    }
+   }, [isLoggedIn, navigate]);
+
 
     return(
-        <div style={{ marginTop:'100px', textAlign:'center' }}>
-            <h1>NEWS FINDER</h1>
-            <h3>Login Account</h3>
-            <form className='ui form' onSubmit={isLoggedIn}> 
-            <Box sx={{ width: 250, height:200, textAlign:'center',  margin:'auto'}}>
-            <Box sx={{ display:'flex', alignItems:'flex-end', marginBottom:'20px',}}>
-                <AccountCircleRounded sx={{ color:'action.active', mr: 1, my: 0.5 }}/>
-                <TextField id='username' label="Username" variant="standard" value={userName} onChange={(e)=> setUserName(e.target.value)}/>
-            </Box>
-            <Box sx={{ display:'flex', alignItems:'flex-end', marginBottom:'20px'}}>
-                <Password sx={{ color:'action.active', mr: 1, my: 0.5 }}/>
-                <TextField id='password' label="Password" variant="standard" value={password} onChange={(e)=> setPassword(e.target.value)}/>
-            </Box>
-            <Button variant='contained' color='secondary' type='submit'> Login </Button>
-            </Box>
-            </form>
-        </div>
+        <Grid container spacing={2} justifyContent="center" alignItems="center" style={{ height: '50vh' }}>
+            <h1>News Finder Login</h1>
+        <Grid item xs={12}>
+          <TextField
+            label="Username"
+            variant="outlined"
+            fullWidth
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={handleLogin}
+            disabled={isLoginProgress}
+          >
+            {isLoginProgress ? 'Logging in...' : 'Login'}
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <LinearProgress style={{ visibility: isLoginProgress ? 'visible' : 'hidden' }} />
+        </Grid>
+        <Snackbar open={errorMessage !== ''} autoHideDuration={3000} onClose={() => setErrorMessage('')}>
+          <Alert severity="error" onClose={() => setErrorMessage('')}>
+            {errorMessage}
+          </Alert>
+        </Snackbar>
+      </Grid>
     );
 }
 

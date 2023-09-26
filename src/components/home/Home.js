@@ -1,9 +1,11 @@
-import { Avatar, Box, Button, Chip, Grid, Stack, TextField } from "@mui/material";
+import { Grid } from "@mui/material";
 import Header from "../header/Header";
 import FavouritePanel from "../favouritePanel/FavouritePanel";
+import { useState } from "react";
 
 
 const Home = () =>{
+    const [keyword, setKeyword] = useState('');
     return(
             <Grid container className="main-container" direction={"column"}>
                 <Grid className="header-container" item lg={1} style={{ maxHeight:"10vh" }}>
